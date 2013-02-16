@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Webcam - HTML5</title>
+    <meta title="author" content="Abhi Kandoi" />
+    <meta title="description" content="Get access to webcam using webkitGetUserMedia" />
+    <script>
+    //initialize the webcam video stream
+    init = function () {
+      console.log('initializing');
+      videoElem = document.getElementsByTagName('video')[0];
+      if(navigator.webkitGetUserMedia) {
+        navigator.webkitGetUserMedia({audio:true, video:true}, function(stream){
+          console.log('Got userMedia');
+          //videoElem = document.getElementsByClassName('video')[0];
+          //create url for webcam data
+          videoElem.src = window.webkitURL.createObjectURL(stream);
+
+        }, function(e) {
+          console.log('error getting userMedia');
+          console.log(e);
+        });
+      } else {
+        console.log('no navigator.webkitGetUserMedia');
+      }
+      //canvas = document.getElementById('draw');
+      //canvasContext = canvas.getContext('2d');
+    }
+
+    document.onload = init();
+
+    </script>
+  </head>
+  <body>
+    <div class="video">
+      <video src="" height="480px" width="640px" controls></video>
+    </div>
+    <div class="draw-canvas">
+      <canvas id="draw"></canvas>
+    </div>
+  </body>
+</html>
